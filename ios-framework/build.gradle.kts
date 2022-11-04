@@ -16,7 +16,7 @@ kotlin {
     val xcf = XCFramework("DroidKaigiMPP")
     val iosTargets = listOf(
         iosArm64(),
-        iosX64("ios")
+        iosX64()
     )
     iosTargets.forEach {
         it.binaries {
@@ -39,34 +39,39 @@ kotlin {
                 implementation(projects.data.db)
                 api(projects.data.repository)
 
-                implementation(Dep.Coroutines.bom)
-                implementation(Dep.Coroutines.core) {
-                    version {
-                        strictly(Versions.coroutines)
-                    }
-                }
+                implementation(project.dependencies.platform(Dep.Coroutines.bom))
+                implementation(Dep.Coroutines.core)
+//                {
+//                    version {
+//                        strictly(Versions.coroutines)
+//                    }
+//                }
             }
         }
         val commonTest by getting {
             dependencies {
-                implementation(kotlin("test-common"))
-                implementation(kotlin("test-annotations-common"))
+                implementation(kotlin("test"))
             }
         }
-        val iosMain by getting {
+
+        val iosMain by creating {
+            dependsOn(commonMain)
             dependencies {
                 implementation(Dep.Koin.core)
             }
         }
+        val iosX64Main by getting {
+            dependsOn(iosMain)
+        }
         val iosArm64Main by getting {
             dependsOn(iosMain)
         }
-        val iosTest by getting
     }
 }
 
 // Workaround for issues where types defined in iOS native code cannot be referenced in Android Studio
-tasks.getByName("preBuild").dependsOn(tasks.getByName("compileKotlinIos"))
+tasks.getByName("preBuild").dependsOn(tasks.getByName("compileKotlinIosX64"))
+tasks.getByName("preBuild").dependsOn(tasks.getByName("compileKotlinIosArm64"))
 
 task("createXCFramework") {
     this.dependsOn(tasks.getByName("assembleDroidKaigiMPPXCFramework"))
@@ -77,3 +82,9 @@ task("createXCFramework") {
         outputFile.copyRecursively(target = targetFile)
     }
 }
+
+//tasks.register<Copy>("createXCFramework") {
+//    dependsOn(tasks.getByName("assembleDroidKaigiMPPDebugXCFramework"))
+//    from(layout.buildDirectory.dir("out/xcframework/debug/DroidKaigiMPP.xcframework"))
+//    into(layout.projectDirectory.dir("../ios/build/xcframeworks/DroidKaigiMPP.xcframework"))
+//}

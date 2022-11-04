@@ -12,14 +12,15 @@ kotlin {
     android()
     ios()
     sourceSets {
-        android
+//        android
         commonMain.dependencies {
             api project.dependencies.platform(Dep.Coroutines.bom)
-            api (Dep.Coroutines.core) {
-                version {
-                    strictly Versions.coroutines
-                }
-            }
+            api (Dep.Coroutines.core)
+//                    {
+//                version {
+//                    strictly Versions.coroutines
+//                }
+//            }
             api Dep.datetime
             api Dep.napier
         }

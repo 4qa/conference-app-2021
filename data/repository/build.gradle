@@ -25,7 +25,7 @@ kotlin {
     // https://kotlinlang.org/docs/mpp-share-on-platforms.html#share-code-on-similar-platforms
     def iosTargets = [
             iosArm64(),
-            iosX64("ios")
+            iosX64()
     ]
     iosTargets.forEach {
         it.binaries.forEach {
@@ -39,12 +39,13 @@ kotlin {
             api projects.data.api
             api projects.data.db
 
-            implementation Dep.Coroutines.bom
-            implementation (Dep.Coroutines.core) {
-                version {
-                    strictly Versions.coroutines
-                }
-            }
+            implementation project.dependencies.platform(Dep.Coroutines.bom)
+            implementation (Dep.Coroutines.core)
+//                    {
+//                version {
+//                    strictly Versions.coroutines
+//                }
+//            }
         }
         commonTest.dependencies {
             implementation Dep.KotlinTest.common
@@ -74,9 +75,13 @@ kotlin {
                 srcDir 'src/androidTest'
             }
         }
-        iosMain.dependencies {
-            implementation Dep.Koin.core
+        iosMain{
+            dependsOn(commonMain)
+            dependencies {
+                implementation Dep.Koin.core
+            }
         }
+        iosX64Main.dependsOn(iosMain)
         iosArm64Main.dependsOn(iosMain)
     }
 }

@@ -248,10 +248,10 @@ fun fakeFeedItemDao(error: AppError? = null): FeedItemDao = object : FeedItemDao
     }
 
     override fun insert(feeds: List<FeedItem>) {
-        channel.offer((channel.poll() ?: emptyList()) + feeds)
+        channel.trySend((channel.tryReceive().getOrNull() ?: emptyList()) + feeds).isSuccess
     }
 
     override fun deleteAll() {
-        channel.offer(emptyList())
+        channel.trySend(emptyList()).isSuccess
     }
 }

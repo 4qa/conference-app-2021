@@ -1,8 +1,10 @@
 package io.github.droidkaigi.feeder
 
 object Versions {
-    const val compose = "1.1.0-beta01"
-    const val coroutines = "1.5.0-native-mt"
+//    const val compose = "1.4.0-alpha01"
+    const val compose = "1.3.2"
+    const val runTimeCompose = "1.4.0-alpha01"
+    const val coroutines = "1.6.3-native-mt"
 }
 
 object Dep {
@@ -11,18 +13,18 @@ object Dep {
         const val constraintLayout =
             "androidx.constraintlayout:constraintlayout-compose:1.0.0-rc01"
         const val navigation = "androidx.navigation:navigation-compose:2.4.0-beta01"
-        const val livedata = "androidx.compose.runtime:runtime-livedata:${Versions.compose}"
-        const val runtime = "androidx.compose.runtime:runtime:${Versions.compose}"
-        const val foundation = "androidx.compose.foundation:foundation:${Versions.compose}"
-        const val layout = "androidx.compose.foundation:foundation-layout:${Versions.compose}"
-        const val ui = "androidx.compose.ui:ui:${Versions.compose}"
-        const val test = "androidx.compose.ui:ui-test-junit4:${Versions.compose}"
-        const val tooling = "androidx.compose.ui:ui-tooling:${Versions.compose}"
-        const val util = "androidx.compose.ui:ui-util:${Versions.compose}"
-        const val material = "androidx.compose.material:material:${Versions.compose}"
+        const val livedata = "androidx.compose.runtime:runtime-livedata:${Versions.runTimeCompose}"
+        const val runtime = "androidx.compose.runtime:runtime:${Versions.runTimeCompose}"
+        const val foundation = "androidx.compose.foundation:foundation:${Versions.runTimeCompose}"
+        const val layout = "androidx.compose.foundation:foundation-layout:${Versions.runTimeCompose}"
+        const val ui = "androidx.compose.ui:ui:${Versions.runTimeCompose}"
+        const val test = "androidx.compose.ui:ui-test-junit4:${Versions.runTimeCompose}"
+        const val tooling = "androidx.compose.ui:ui-tooling:${Versions.runTimeCompose}"
+        const val util = "androidx.compose.ui:ui-util:${Versions.runTimeCompose}"
+        const val material = "androidx.compose.material:material:${Versions.runTimeCompose}"
         const val iconsExtended =
-            "androidx.compose.material:material-icons-extended:${Versions.compose}"
-        const val animation = "androidx.compose.animation:animation:${Versions.compose}"
+            "androidx.compose.material:material-icons-extended:${Versions.runTimeCompose}"
+        const val animation = "androidx.compose.animation:animation:${Versions.runTimeCompose}"
         const val hiltNavigationCompose = "androidx.hilt:hilt-navigation-compose:1.0.0-alpha03"
     }
 
@@ -46,31 +48,31 @@ object Dep {
     }
 
     object MultiplatformSettings {
-        const val settings = "com.russhwolf:multiplatform-settings:0.7.2"
-        const val coroutines = "com.russhwolf:multiplatform-settings-coroutines:0.7.2"
-        const val datastore = "com.russhwolf:multiplatform-settings-datastore:0.7.2"
-        const val test = "com.russhwolf:multiplatform-settings-test:0.7.2"
+        const val settings = "com.russhwolf:multiplatform-settings:0.9"
+        const val coroutines = "com.russhwolf:multiplatform-settings-coroutines:0.9"
+        const val datastore = "com.russhwolf:multiplatform-settings-datastore:0.9"
+        const val test = "com.russhwolf:multiplatform-settings-test:0.9"
     }
 
     object Kotlin {
-        const val bom = "org.jetbrains.kotlin:kotlin-bom:1.5.31"
+        const val bom = "org.jetbrains.kotlin:kotlin-bom:1.7.20"
 
         // bom import does not working...
-        const val plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.31"
-        const val serializationPlugin = "org.jetbrains.kotlin:kotlin-serialization:1.5.31"
+        const val plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.20"
+        const val serializationPlugin = "org.jetbrains.kotlin:kotlin-serialization:1.7.20"
         const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib"
-        const val stdlibJdk8 = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.31"
+        const val stdlibJdk8 = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.20"
         const val reflect = "org.jetbrains.kotlin:kotlin-reflect"
     }
 
     object Coroutines {
         const val bom = "org.jetbrains.kotlinx:kotlinx-coroutines-bom:${Versions.coroutines}"
-        const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core"
-        const val test = "org.jetbrains.kotlinx:kotlinx-coroutines-test"
+        const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}"
+        const val test = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.coroutines}"
     }
 
     object Serialization {
-        const val core = "org.jetbrains.kotlinx:kotlinx-serialization-core:1.3.0"
+        const val core = "org.jetbrains.kotlinx:kotlinx-serialization-core:1.4.1"
     }
 
     object KotlinTest {
@@ -80,7 +82,7 @@ object Dep {
     }
 
     object Ktor {
-        const val bom = "io.ktor:ktor-bom:1.6.1"
+        const val bom = "io.ktor:ktor-bom:1.6.8"
         const val core = "io.ktor:ktor-client-core"
         const val json = "io.ktor:ktor-client-json"
         const val logging = "io.ktor:ktor-client-logging"
@@ -94,15 +96,15 @@ object Dep {
         const val plugin = "com.google.gms:google-services:4.3.5"
     }
 
-    const val datetime = "org.jetbrains.kotlinx:kotlinx-datetime:0.1.1"
-    const val ktlint = "com.pinterest:ktlint:0.42.1"
+    const val datetime = "org.jetbrains.kotlinx:kotlinx-datetime:0.3.3"
+    const val ktlint = "com.pinterest:ktlint:0.47.1"
     const val exhaustivePlugin = "app.cash.exhaustive:exhaustive-gradle:0.2.0"
 
     object Dagger {
-        const val plugin = "com.google.dagger:hilt-android-gradle-plugin:2.40.5"
-        const val hiltAndroid = "com.google.dagger:hilt-android:2.40.5"
-        const val hiltAndroidTesting = "com.google.dagger:hilt-android-testing:2.40.5"
-        const val hiltAndroidCompiler = "com.google.dagger:hilt-android-compiler:2.40.5"
+        const val plugin = "com.google.dagger:hilt-android-gradle-plugin:2.44"
+        const val hiltAndroid = "com.google.dagger:hilt-android:2.44"
+        const val hiltAndroidTesting = "com.google.dagger:hilt-android-testing:2.44"
+        const val hiltAndroidCompiler = "com.google.dagger:hilt-android-compiler:2.44"
     }
 
     object Accompanist {
@@ -130,9 +132,9 @@ object Dep {
     const val buildKonfig = "com.codingfeline.buildkonfig:buildkonfig-gradle-plugin:0.10.2"
 
     object SQLDelight {
-        const val plugin = "com.squareup.sqldelight:gradle-plugin:1.4.4"
-        const val androidDriver = "com.squareup.sqldelight:android-driver:1.4.4"
-        const val coroutinesExtensions = "com.squareup.sqldelight:coroutines-extensions:1.4.4"
+        const val plugin = "com.squareup.sqldelight:gradle-plugin:1.5.4"
+        const val androidDriver = "com.squareup.sqldelight:android-driver:1.5.4"
+        const val coroutinesExtensions = "com.squareup.sqldelight:coroutines-extensions:1.5.4"
     }
 
     object Flipper {
@@ -142,9 +144,9 @@ object Dep {
     }
 
     object Koin {
-        const val core = "io.insert-koin:koin-core:3.0.1-beta-1"
-        const val test = "io.insert-koin:koin-test:3.0.1-beta-1"
-        const val ktor = "io.insert-koin:koin-ktor:3.0.1-beta-1"
+        const val core = "io.insert-koin:koin-core:3.2.0"
+        const val test = "io.insert-koin:koin-test:3.2.0"
+        const val ktor = "io.insert-koin:koin-ktor:3.2.0"
     }
 
     const val desugarJdkLibs = "com.android.tools:desugar_jdk_libs:1.1.5"

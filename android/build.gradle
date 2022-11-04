@@ -15,7 +15,7 @@ plugins {
 apply from: rootProject.file("gradle/compose.gradle")
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion 33
     buildToolsVersion "30.0.3"
 
     defaultConfig {
@@ -105,6 +105,10 @@ dependencies {
     implementation projects.data.repository
     implementation projects.uicomponentCompose.main
 
+    def lifecycle_version = "2.4.0"
+    implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+
     // Java 8+ API desugaring support
     coreLibraryDesugaring Dep.desugarJdkLibs
 
@@ -117,12 +121,12 @@ dependencies {
     kaptAndroidTest Dep.Dagger.hiltAndroidCompiler
 
     // For local unit tests
-    testImplementation Dep.Dagger.hiltAndroidTesting
-    kaptTest Dep.Dagger.hiltAndroidCompiler
+//    testImplementation Dep.Dagger.hiltAndroidTesting
+//    kaptTest Dep.Dagger.hiltAndroidCompiler
 
     implementation Dep.Jetpack.hiltCommon
     implementation Dep.Jetpack.hiltLifeCycleViewModel
-    kapt Dep.Dagger.hiltAndroidCompiler
+//    kapt Dep.Dagger.hiltAndroidCompiler
 
     implementation Dep.Compose.activity
     implementation Dep.Compose.runtime

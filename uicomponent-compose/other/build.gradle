@@ -62,3 +62,12 @@ dependencies {
     implementation Dep.Jetpack.browser
     implementation Dep.playServicesOssLicenses
 }
+
+configurations.all {
+    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+        if (details.requested.group == 'androidx.compose.compiler' && details.requested.name == 'compiler' && details.requested.version == '1.4.0-alpha01') {
+            details.useVersion '1.3.2'
+            details.because 'fixes critical bug in 1.2'
+        }
+    }
+}

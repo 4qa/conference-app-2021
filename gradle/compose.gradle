@@ -21,7 +21,7 @@ android {
 //        freeCompilerArgs = freeCompilerArgs + compilerArgs
 //    }
     composeOptions {
-        kotlinCompilerExtensionVersion "${Versions.compose}"
+        kotlinCompilerExtensionVersion "${Versions.runTimeCompose}"
     }
 }
 

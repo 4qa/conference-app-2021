@@ -1,6 +1,15 @@
 import io.github.droidkaigi.feeder.Dep
 import io.github.droidkaigi.feeder.Versions
 
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'org.jetbrains.kotlinx:atomicfu-gradle-plugin:0.18.5'
+    }
+}
+
 plugins {
     id("kotlin-multiplatform")
     id("kotlinx-serialization")
@@ -8,8 +17,10 @@ plugins {
     id("com.android.library")
     id("com.codingfeline.buildkonfig")
 }
+apply plugin: 'kotlinx-atomicfu'
 
 apply from: rootProject.file("gradle/android.gradle")
+
 
 tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile.class).all {
     kotlinOptions {
@@ -19,6 +30,8 @@ tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile.class).all {
     }
 }
 
+
+
 kotlin {
     android()
 
@@ -26,7 +39,7 @@ kotlin {
     // https://kotlinlang.org/docs/mpp-share-on-platforms.html#share-code-on-similar-platforms
     def iosTargets = [
             iosArm64(),
-            iosX64("ios")
+            iosX64()
     ]
     iosTargets.forEach {
         it.binaries.forEach {
@@ -39,17 +52,18 @@ kotlin {
             api projects.model
             implementation projects.data.db
 
-            implementation Dep.Ktor.bom
-            implementation (Dep.Coroutines.core) {
-                version {
-                    strictly Versions.coroutines
-                }
-            }
+            implementation project.dependencies.platform(Dep.Ktor.bom)
+//            implementation Dep.Coroutines.core
+//                    {
+//                version {
+//                    strictly Versions.coroutines
+//                }
+//            }
             implementation Dep.Ktor.json
             implementation Dep.Ktor.serialization
             implementation Dep.Ktor.logging
 
-            implementation Dep.Coroutines.bom
+            implementation project.dependencies.platform(Dep.Coroutines.bom)
             implementation Dep.Coroutines.core
 
             implementation Dep.Serialization.core
@@ -60,7 +74,7 @@ kotlin {
             implementation Dep.KotlinTest.common
             implementation Dep.KotlinTest.annotationCommon
 
-            implementation Dep.Ktor.bom
+//            implementation Dep.Ktor.bom
             implementation Dep.Ktor.mock
         }
 //        jvmMain
@@ -93,10 +107,14 @@ kotlin {
                 srcDir 'src/androidTest'
             }
         }
-        iosMain.dependencies {
-            implementation Dep.Ktor.ios
-            implementation Dep.Koin.core
+        iosMain{
+            dependsOn(commonMain)
+            dependencies {
+                implementation Dep.Ktor.ios
+                implementation Dep.Koin.core
+            }
         }
+        iosX64Main.dependsOn(iosMain)
         iosArm64Main.dependsOn(iosMain)
     }
 }

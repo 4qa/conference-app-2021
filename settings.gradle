@@ -1,5 +1,5 @@
 rootProject.name = "conference-app-2021"
-include ':android'
+//include ':android'
 include ':model'
 include ':uicomponent-compose:main'
 include ':uicomponent-compose:feed'
@@ -13,3 +13,5 @@ include ':ios-framework'
 include ':checks'
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
+
